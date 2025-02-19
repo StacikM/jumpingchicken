@@ -1,26 +1,8 @@
 workflows:
-  ios:
-    name: Build and deploy Cordova game for iOS
-    max_build_duration: 120
-    instance_type: macos-latest
-    platform: ios
-    scripts:
-      - name: Install dependencies
-        script: |
-          # Install dependencies (Cordova and any plugins)
-          npm install
-          npm install -g cordova
-          cordova platform add ios --nofetch
-
-      - name: Build the app
-        script: |
-          # Build the Cordova project
-          cordova build ios --release --device
-
-      - name: Upload .ipa to App Store Connect
-        script: |
-          # Upload the .ipa to App Store Connect
-          curl -s https://raw.githubusercontent.com/bitrise-io/steps-ios-deliver/master/ios-deliver.sh | bash
-
-    artifacts:
-      - build/ios/*.ipa
+  ios-workflow:
+    name: iOS Workflow 
+    # ....
+    environment:
+      ios_signing:
+        distribution_type: app_store # or: ad_hoc | development | enterprise
+        bundle_identifier: com.ctkgames.jumpingchicken
